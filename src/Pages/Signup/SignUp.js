@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading";
 import { Link, useNavigate } from "react-router-dom";
 import { sendEmailVerification } from "firebase/auth";
+import useToken from "../../Hooks/useToken";
 
 const SignUp = () => {
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -22,6 +23,9 @@ const SignUp = () => {
     handleSubmit,
   } = useForm();
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+  const [token] = useToken(user || gUser);
+
   const navigate = useNavigate();
 
   let signInError;
@@ -40,8 +44,8 @@ const SignUp = () => {
     return signInError;
   }
 
-  if (user) {
-    console.log(user);
+  if (token) {
+    navigate("/appointment");
   }
 
   const verifyEmail = () => {
@@ -160,7 +164,7 @@ const SignUp = () => {
             <small>
               New to Doctors Portal?{" "}
               <Link className="text-primary" to="/login">
-                Create New Account
+                Please Login
               </Link>
             </small>
           </p>
