@@ -8,12 +8,15 @@ import Appoinment from "./Pages/Appointment/Appointment";
 import Footer from "./Pages/Shared/Footer";
 import SignUp from "./Pages/Signup/SignUp";
 import RequireAuth from "./Pages/Login/RequireAuth";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyAppointment from "./Pages/Dashboard/MyAppointment";
 import MyReview from "./Pages/Dashboard/MyReview";
 import AllPatient from "./Pages/Dashboard/AllPatient";
+import RequireAdmin from "./Pages/Login/RequireAdmin";
+import AddDoctor from "./Pages/Dashboard/AddDoctor";
+import ManageDoctor from "./Pages/Dashboard/ManageDoctor";
 
 function App() {
   return (
@@ -42,7 +45,30 @@ function App() {
         >
           <Route index element={<MyAppointment></MyAppointment>}></Route>
           <Route path="review" element={<MyReview></MyReview>}></Route>
-          <Route path="patient" element={<AllPatient></AllPatient>}></Route>
+          <Route
+            path="patient"
+            element={
+              <RequireAdmin>
+                <AllPatient></AllPatient>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="addDoctor"
+            element={
+              <RequireAdmin>
+                <AddDoctor></AddDoctor>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="manageDoctor"
+            element={
+              <RequireAdmin>
+                <ManageDoctor></ManageDoctor>
+              </RequireAdmin>
+            }
+          ></Route>
         </Route>
       </Routes>
       <Footer></Footer>
