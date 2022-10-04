@@ -16,6 +16,9 @@ const AppointmentCard = ({ service, setTreatment }) => {
           {service.slots.length}
           {service.slots.length > 1 ? " spaces" : " space"} available
         </p>
+        <p>
+          <small>Price: ${service.price}</small>
+        </p>
         <div className="card-actions">
           <label
             disabled={service.slots.length === 0}
